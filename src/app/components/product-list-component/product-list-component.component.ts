@@ -1,7 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ProductModel } from 'src/app/interface/products';
-import { CartService } from 'src/app/services/cart.service';
 
+import { ProductModel } from 'src/app/interface/products';
 import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
@@ -17,7 +16,6 @@ export class ProductListComponentComponent implements OnInit {
 
   constructor(
     private productsServiceService: ProductsService,
-    private cartServiceService: CartService
   ) { }
 
   ngOnInit(): void {
@@ -28,8 +26,5 @@ export class ProductListComponentComponent implements OnInit {
   public onBuyProduct(newValue: ProductModel): void {
     console.log('buy products');
     this.buyProduct.emit(newValue);
-    // this.cartServiceService.orderList.push(newValue);
-    // this.cartServiceService.orderSum += newValue.price;
   }
-
 }
