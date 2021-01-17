@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="container-titles">
+        <div *ngFor="let title of titles">
+            <div>{{ title }}</div>
+        </div>
+    </div>
+    <div class="container-products">
+        <div *ngFor="let product of products">
+            <app-product-component 
+            [product]="product"
+            (buyProduct)="onBuyProduct($event)"></app-product-component>
+        </div>
+    </div>
+</div>

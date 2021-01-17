@@ -1,0 +1,10 @@
+<div class="order-list">
+    <div>your cart</div>
+    <div class="product-list" *ngFor="let product of orderList; trackBy: trackByItems">
+        <div>{{ product.category }}</div>
+        <div>{{ product.name }}</div>
+        <div>{{ product.description }}</div>
+        <div><button (click)="delitePrpduct(product)">delite product</button></div>
+    </div>
+    <div>SUM: {{ orderSum }}</div>
+</div>

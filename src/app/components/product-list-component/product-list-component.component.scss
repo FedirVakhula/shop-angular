@@ -1,0 +1,17 @@
+.container-titles,
+.product-list {
+    display: flex;
+    justify-content: space-around;
+    border: solid 1px gray;
+    border-radius: 5px;
+
+    div {
+        width: 15%;
+        padding: 3px 10px;
+    }
+}
+
+.container-products {
+    border: solid 1px gray;
+    border-radius: 5px;
+}

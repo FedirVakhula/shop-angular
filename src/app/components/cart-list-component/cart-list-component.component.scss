@@ -1,0 +1,12 @@
+.order-list {
+    border: solid 1px gray;
+    border-radius: 5px;
+
+    .product-list {
+        display: flex;
+
+        div {
+            width: 20%;
+        }
+    }
+}
