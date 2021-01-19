@@ -12,13 +12,14 @@ export class CartListComponentComponent {
   @Output() deliteProduct: EventEmitter<ProductModel> = new EventEmitter();
 
   get orderSum(): number {
-    return this.orderList.reduce((prev, curr) => prev + curr.price, 0)
+    return this.orderList.reduce((prev, curr) => prev + curr.price, 0);
   }
   trackByItems(index: number, item: ProductModel): string { return item.id; }
 
   constructor() { }
 
-  delitePrpduct(value: ProductModel) : void{
+  // delete?
+  delitePrpduct(value: ProductModel): void{
     this.deliteProduct.emit(value);
   }
 

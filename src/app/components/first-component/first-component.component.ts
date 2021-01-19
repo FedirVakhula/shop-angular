@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./first-component.component.scss']
 })
 export class FirstComponentComponent implements OnInit {
-  title: string = 'Internet Market';
+  title = 'Internet Market';
   constructor() { }
 
   ngOnInit(): void {
   }
 
 }
+// линтер
