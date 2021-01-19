@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
     this.orderList.push(value);
   }
 
+  // delete?
   deliteProduct(value: ProductModel): void {
     const indexProduct = this.orderList.indexOf(value);
     this.orderList.splice(indexProduct, 1);

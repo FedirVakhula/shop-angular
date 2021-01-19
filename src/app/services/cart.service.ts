@@ -7,7 +7,8 @@ import { ProductModel } from '../interface/products';
 })
 export class CartService {
   orderList: ProductModel[] = [];
-  orderSum: number = 0;
+  orderSum = 0;
 
   constructor() { }
 }
+// линтер
