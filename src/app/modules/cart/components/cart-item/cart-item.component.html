@@ -1,0 +1,15 @@
+<div class="order-list">
+    <div appHighlight="green">{{ product.art }}</div>
+    <div>{{ product.category }}</div>
+    <div>{{ product.name }}</div>
+    <div>{{ product.description }}</div>
+    <div class="container-quantity">
+        <div><input type="number" 
+                #quantity 
+                value={{product.quantity}}
+                (blur)="onBlurMethod(product, quantity.value)"
+                (wheel)="onWheelMethod(product, quantity.value)"></div>
+        <div><button (click)="changeQuantity(product, quantity.value)">change the quantity</button></div>
+    </div>
+    <div><button (click)="deletePrpduct(product)">delete product</button></div>
+</div>

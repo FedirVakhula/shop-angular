@@ -1,0 +1,12 @@
+<div class="order-list">
+    <div>your cart</div>
+    <div class="product-list" *ngFor="let product of orderList; trackBy: trackByItems">
+        <app-cart-item appCartItem
+            [product]="product"
+            (deleteProduct)="deleteProduct($event)"
+            (changeQuantityProduct)="changeQuantityProduct($event)"
+    ></app-cart-item>
+    </div>
+    <div [ngClass]="{'order-sum':orderSum > 25000}" >SUM: {{ orderSum }}</div>
+    <div>quantity of goods: {{ orderSumQuantity }}</div>
+</div>

@@ -1,27 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
-import { ProductModel } from './interface/products';
+import { CartProduct } from './interface/products';
+import { ProductsModule } from './modules/products/products.module';
+import { CartService } from './services/cart.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
-  orderList: ProductModel[] = [];
+export class AppComponent implements OnInit, AfterViewInit {
+  newProduct: CartProduct;
+  orderList: ProductsModule[];
 
-  constructor() { }
+  @ViewChild('appTitle') appTitle: ElementRef;
+
+  constructor( private cartService: CartService) { }
+
+  ngAfterViewInit(): void {
+    this.appTitle.nativeElement.innerText = 'Title';
+  }
 
   ngOnInit(): void {
+    this.orderList = this.cartService.orderList;
   }
 
-  onBuyProduct(value: ProductModel): void {
-    this.orderList.push(value);
-  }
-
-  // delete?
-  deliteProduct(value: ProductModel): void {
-    const indexProduct = this.orderList.indexOf(value);
-    this.orderList.splice(indexProduct, 1);
+  onBuyProduct(value: CartProduct): void {
+    this.newProduct = value;
   }
 }

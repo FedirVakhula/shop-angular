@@ -1,0 +1,33 @@
+.order-list {
+    display: flex;
+    justify-content: space-around;
+    border-bottom: solid 1px gray;
+
+    div {
+        width: 15%;
+        padding: 3px 10px;
+    }
+}
+
+.container-quantity {
+    display: flex;
+
+    div {
+        width: 100%;
+    }
+
+    input {
+        width: 30%;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+
+:host.headingClass {
+    border: 2px solid red;
+    display: block;
+    padding: 10px;
+}
+
