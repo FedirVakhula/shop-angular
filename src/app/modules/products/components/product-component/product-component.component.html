@@ -1,0 +1,19 @@
+<div class="product-list">
+    <div>{{ product.art }}</div>
+    <div>{{ product.category }}</div>
+    <div>{{ product.name }}</div>
+    <div>{{ product.model }}</div>
+    <div>{{ product.description }}</div>
+    <div>{{ product.color }}</div>
+    <div>{{ product.price }}</div>
+    <div class="container-quantity">
+        <div><input [disabled]="!product.isAvailable" 
+            type="number" 
+            #quantity 
+            value="1" 
+            id="quantity"></div>
+    </div>
+    <div>
+        <button [disabled]="!product.isAvailable" (click)="onBuy(product, quantity.value)">Buy</button>
+    </div>
+</div>

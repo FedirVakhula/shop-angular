@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
-import { ProductModel } from 'src/app/interface/products';
+import { CartProduct, ProductModel } from 'src/app/interface/products';
 import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
@@ -12,7 +12,7 @@ export class ProductListComponentComponent implements OnInit {
   products: ProductModel[];
   titles: Array<string>;
 
-  @Output() buyProduct: EventEmitter<ProductModel> = new EventEmitter();
+  @Output() buyProduct: EventEmitter<CartProduct> = new EventEmitter();
 
   constructor(
     private productsServiceService: ProductsService,
@@ -23,7 +23,7 @@ export class ProductListComponentComponent implements OnInit {
     this.titles = this.productsServiceService.getTableColumnTitles();
   }
 
-  public onBuyProduct(newValue: ProductModel): void {
+  public onBuyProduct(newValue: CartProduct): void {
     console.log('buy products');
     this.buyProduct.emit(newValue);
   }

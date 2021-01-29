@@ -1,7 +1,5 @@
+<h1 #appTitle></h1>
 <app-first-component></app-first-component>
 <app-product-list-component (buyProduct)="onBuyProduct($event)"></app-product-list-component>
-<app-cart-list-component *ngIf="orderList?.length>0; else elseBlock"
-    [orderList]="orderList" 
-    (deliteProduct)="deliteProduct($event)" 
-    ></app-cart-list-component>
+<app-cart-list-component [newProduct]="newProduct" ></app-cart-list-component>
 <ng-template #elseBlock><div>your cart is empty</div></ng-template>

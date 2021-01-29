@@ -13,4 +13,3 @@ export class FirstComponentComponent implements OnInit {
   }
 
 }
-// линтер
