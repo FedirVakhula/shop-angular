@@ -6,9 +6,10 @@
     <div class="container-quantity">
         <div><input type="number" 
                 #quantity 
-                value={{product.quantity}}
+                [value]="product.quantity"
                 (blur)="onBlurMethod(product, quantity.value)"
-                (wheel)="onWheelMethod(product, quantity.value)"></div>
+                (wheel)="onWheelMethod(product, quantity.value)"
+                (change)="changeQuantity(product, quantity.value)"></div>
         <div><button (click)="changeQuantity(product, quantity.value)">change the quantity</button></div>
     </div>
     <div><button (click)="deletePrpduct(product)">delete product</button></div>
