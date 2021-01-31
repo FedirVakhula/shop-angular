@@ -1,4 +1,5 @@
-<div class="order-list">
+<div *ngIf="!isEmpty; else elseBlock" class="order-list">
+    
     <div>your cart</div>
     <div class="product-list" *ngFor="let product of orderList; trackBy: trackByItems">
         <app-cart-item appCartItem
@@ -9,4 +10,6 @@
     </div>
     <div [ngClass]="{'order-sum':orderSum > 25000}" >SUM: {{ orderSum }}</div>
     <div>quantity of goods: {{ orderSumQuantity }}</div>
+    <div><button (click)="removeAllProducts()">remove all products</button></div>
 </div>
+<ng-template #elseBlock><div>your cart is empty</div></ng-template>

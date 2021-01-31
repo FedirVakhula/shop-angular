@@ -7,7 +7,6 @@ import { FirstComponentComponent } from './components/first-component/first-comp
 import { CartModule } from './modules/cart/cart.module';
 import { ProductsModule } from './modules/products/products.module';
 import { OrdersModule } from './modules/orders/orders.module';
-import { SharedModule } from './modules/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +16,6 @@ import { SharedModule } from './modules/shared/shared.module';
   imports: [
     CartModule,
     ProductsModule,
-    SharedModule,
     OrdersModule,
     AppRoutingModule,
     BrowserModule

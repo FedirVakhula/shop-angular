@@ -15,11 +15,15 @@ export class CartListComponentComponent implements OnChanges {
   orderList: CartProduct[] = [];
 
   get orderSum(): number {
-    return this.orderList.reduce((prev: number, curr: CartProduct) => curr.quantity * curr.price + prev, 0);
+    return this.cartService.totalSum;
   }
 
   get orderSumQuantity(): number {
-    return this.orderList.reduce((prev: number, curr: CartProduct) => +prev + +curr.quantity, 0);
+    return this.cartService.totalQuantity;
+  }
+
+  get isEmpty(): boolean {
+    return this.cartService.isEmptyCart();
   }
 
   trackByItems(index: number, item: ProductModel): string { return item.id; }
@@ -28,16 +32,20 @@ export class CartListComponentComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.newProduct?.currentValue) {
-      this.orderList = this.cartService.compressProductList(this.newProduct);
+      this.orderList = this.cartService.addProduct(this.newProduct);
     }
   }
 
   deleteProduct(value: CartProduct): void {
-    this.orderList = this.cartService.deleteProduct(value);
+    this.orderList = this.cartService.removeProduct(value);
   }
 
   changeQuantityProduct(prod: { product: CartProduct, quant: number }): void {
     this.orderList = this.cartService.changeQuantityProduct(prod.product, prod.quant);
+  }
+
+  removeAllProducts(): void {
+    this.orderList = this.cartService.removeAllProducts();
   }
 
 }
