@@ -15,6 +15,7 @@ export interface ProductModel {
     description: string;
 }
 
+// может CartProductModel?
 export interface CartProduct extends ProductModel{
     quantity: number;
 }

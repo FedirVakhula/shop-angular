@@ -17,6 +17,7 @@ export class CartItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // корректное название метода?
   deletePrpduct(value: ProductModel): void {
     this.deleteProduct.emit(value);
   }

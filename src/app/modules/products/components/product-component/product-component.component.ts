@@ -12,7 +12,7 @@ export class ProductComponentComponent implements OnInit {
 
   @Input() product: ProductModel;
   @Output() buyProduct: EventEmitter<CartProduct> = new EventEmitter();
-  @ViewChild('quant') fondovalor: ElementRef;
+  @ViewChild('quant') fondovalor: ElementRef; // для чего?
 
   constructor() { }
 

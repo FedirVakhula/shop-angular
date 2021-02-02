@@ -15,12 +15,12 @@ export class ProductListComponentComponent implements OnInit {
   @Output() buyProduct: EventEmitter<CartProduct> = new EventEmitter();
 
   constructor(
-    private productsServiceService: ProductsService,
+    private productsService: ProductsService,
   ) { }
 
   ngOnInit(): void {
-    this.products = this.productsServiceService.getProducts();
-    this.titles = this.productsServiceService.getTableColumnTitles();
+    this.products = this.productsService.getProducts();
+    this.titles = this.productsService.getTableColumnTitles();
   }
 
   public onBuyProduct(newValue: CartProduct): void {
