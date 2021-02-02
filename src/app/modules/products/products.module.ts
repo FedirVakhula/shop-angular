@@ -15,7 +15,7 @@ import { ProductListComponentComponent } from './components/product-list-compone
     CommonModule
   ],
   exports: [
-    ProductComponentComponent,
+    // ProductComponentComponent,
     ProductListComponentComponent
   ]
 })
