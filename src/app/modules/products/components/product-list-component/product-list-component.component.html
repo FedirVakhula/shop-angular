@@ -5,7 +5,7 @@
         </div>
     </div>
     <div class="container-products">
-        <div *ngFor="let product of products">
+        <div *ngFor="let product of (products$ | async)">
             <app-product-component 
             [product]="product"
             (buyProduct)="onBuyProduct($event)"></app-product-component>

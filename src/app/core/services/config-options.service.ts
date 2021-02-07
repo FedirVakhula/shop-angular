@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User } from '../interface/config-options';
+import { User } from '../models/config-options';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +14,6 @@ export class ConfigOptionsService {
   }
 
   setUser(user: User): void {
-    this.user = new User(user);
+    this.user = { ...this.user, ...user };
   }
 }

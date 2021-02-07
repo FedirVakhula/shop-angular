@@ -1,8 +1,11 @@
 <div class="order-list">
     <div appHighlight="green">{{ product.art }}</div>
     <div>{{ product.category }}</div>
-    <div>{{ product.name }}</div>
+    <div>{{ product.name | titlecase }}</div>
+    <div>{{ product.model | titlecase }}</div>
     <div>{{ product.description }}</div>
+    <div>{{ product.color | titlecase }}</div>
+    <div>{{ product.price | currency:'UAH':'symbol-narrow'}}</div>
     <div class="container-quantity">
         <div><input type="number" 
                 #quantity 
@@ -12,5 +15,5 @@
                 (change)="changeQuantity(product, quantity.value)"></div>
         <div><button (click)="changeQuantity(product, quantity.value)">change the quantity</button></div>
     </div>
-    <div><button (click)="deletePrpduct(product)">delete product</button></div>
+    <div><button (click)="deleteProduct(product)">delete product</button></div>
 </div>

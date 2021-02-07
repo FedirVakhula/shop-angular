@@ -17,3 +17,16 @@ app-cart-item {
 .order-sum {
     background-color: green;
 }
+
+.container-titles {
+    display: flex;
+    justify-content: space-around;
+    border: solid 1px gray;
+    border-radius: 5px;
+    background-color: grey;
+
+    div {
+        width: 15%;
+        padding: 3px 10px;
+    }
+}

@@ -9,7 +9,7 @@ import { CartProduct, ProductModel } from 'src/app/interface/products';
 })
 export class CartItemComponent implements OnInit {
   @Input() product: CartProduct;
-  @Output() deleteProduct: EventEmitter<ProductModel> = new EventEmitter();
+  @Output() deleteProductEmit: EventEmitter<ProductModel> = new EventEmitter();
   @Output() changeQuantityProduct: EventEmitter<{ product: CartProduct, quant: number }> = new EventEmitter();
 
   constructor() { }
@@ -17,12 +17,12 @@ export class CartItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  deletePrpduct(value: ProductModel): void {
-    this.deleteProduct.emit(value);
+  deleteProduct(value: ProductModel): void {
+    this.deleteProductEmit.emit(value);
   }
 
   changeQuantity(product: CartProduct, quant: number): void {
-    this.changeQuantityProduct.emit({ product, quant });
+    this.changeQuantityProduct.emit({ product, quant: +quant });
   }
 
   onBlurMethod(product: CartProduct, quant: number): void {
