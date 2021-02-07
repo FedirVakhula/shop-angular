@@ -1,10 +1,22 @@
 <div *ngIf="!isEmpty; else elseBlock" class="order-list">
-    
     <div>your cart</div>
-    <div class="product-list" *ngFor="let product of orderList; trackBy: trackByItems">
+    <mat-slide-toggle color="warn"
+        [checked]="true"
+        (change)="changeSortStrategy($event)">sort UP or Down</mat-slide-toggle>
+    <div class="container-titles">
+        <div *ngFor="let title of titles">
+            <div>{{ title }}</div>
+            <div *ngIf="title != 'article' && title != 'order'">
+                <mat-slide-toggle color="warn"
+                    name='{{ title }}'
+                    (change)="onToggleChange($event)"></mat-slide-toggle>
+            </div>
+        </div>
+    </div>
+    <div class="product-list" *ngFor="let product of orderList | orderBy: sortBy: sortUpDown; trackBy: trackByItems">
         <app-cart-item appCartItem
             [product]="product"
-            (deleteProduct)="deleteProduct($event)"
+            (deleteProductEmit)="deleteProduct($event)"
             (changeQuantityProduct)="changeQuantityProduct($event)"
     ></app-cart-item>
     </div>

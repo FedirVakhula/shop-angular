@@ -1,7 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 import { CartProduct, ProductModel } from 'src/app/interface/products';
 import { CartService } from 'src/app/services/cart.service';
+import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'app-cart-list-component',
@@ -9,10 +11,13 @@ import { CartService } from 'src/app/services/cart.service';
   styleUrls: ['./cart-list-component.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CartListComponentComponent implements OnChanges {
+export class CartListComponentComponent implements OnChanges, OnInit {
   @Input() newProduct: CartProduct;
 
   orderList: CartProduct[] = [];
+  titles: Array<string>;
+  sortBy: Array<string> = [];
+  sortUpDown = false;
 
   get orderSum(): number {
     return this.cartService.totalSum;
@@ -28,7 +33,14 @@ export class CartListComponentComponent implements OnChanges {
 
   trackByItems(index: number, item: ProductModel): string { return item.id; }
 
-  constructor(private cartService: CartService) { }
+  constructor(
+    private cartService: CartService,
+    private productsService: ProductsService
+  ) { }
+
+  ngOnInit(): void {
+    this.titles = this.productsService.getTableColumnTitles();
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.newProduct?.currentValue) {
@@ -46,6 +58,22 @@ export class CartListComponentComponent implements OnChanges {
 
   removeAllProducts(): void {
     this.orderList = this.cartService.removeAllProducts();
+  }
+
+  onToggleChange(checked: MatSlideToggleChange): void {
+    if (checked.checked) {
+      this.sortBy.push(checked.source.name);
+      this.sortBy = [...this.sortBy];
+
+    } else {
+      const inex = this.sortBy.indexOf(checked.source.name);
+      this.sortBy.splice(inex, 1);
+      this.sortBy = [...this.sortBy];
+    }
+  }
+
+  changeSortStrategy(checked: MatSlideToggleChange): void {
+    this.sortUpDown = checked.checked;
   }
 
 }

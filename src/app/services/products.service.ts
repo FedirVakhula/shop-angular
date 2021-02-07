@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 import { Category, ProductModel } from '../interface/products';
 
@@ -80,6 +81,7 @@ export class ProductsService {
     }, {
       category: Category.MONITOR,
       name: 'Samsung',
+      model: 'Samsung',
       id: 'S24R350',
       art: 'S24R350',
       color: 'Black',
@@ -99,6 +101,7 @@ export class ProductsService {
     }, {
       category: Category.MONITOR,
       name: 'Dell',
+      model: 'Dell',
       id: 'SE2216H',
       art: 'SE2216H',
       color: 'Silver',
@@ -107,12 +110,9 @@ export class ProductsService {
       description: 'lorem.....'
     }];
   titles: Array<string> = ['article', 'category', 'name', 'model', 'description', 'color', 'price', 'quantity', 'order'];
+  products$ = new BehaviorSubject(this.products);
 
   constructor() { }
-
-  getProducts(): ProductModel[] {
-    return this.products;
-  }
 
   getTableColumnTitles(): Array<string> {
     return this.titles;

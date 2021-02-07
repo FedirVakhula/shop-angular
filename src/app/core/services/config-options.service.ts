@@ -14,6 +14,6 @@ export class ConfigOptionsService {
   }
 
   setUser(user: User): void {
-    this.user = new User(user);
+    this.user = { ...this.user, ...user };
   }
 }

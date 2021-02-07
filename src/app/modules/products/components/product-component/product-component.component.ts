@@ -12,7 +12,6 @@ export class ProductComponentComponent implements OnInit {
 
   @Input() product: ProductModel;
   @Output() buyProduct: EventEmitter<CartProduct> = new EventEmitter();
-  @ViewChild('quant') fondovalor: ElementRef;
 
   constructor() { }
 
@@ -23,7 +22,7 @@ export class ProductComponentComponent implements OnInit {
     if (!product.isAvailable) {
       return;
     }
-    const newProduct: CartProduct = { ...product, quantity: value };
+    const newProduct: CartProduct = { ...product, quantity: +value };
     this.buyProduct.emit(newProduct);
   }
 

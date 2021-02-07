@@ -1,11 +1,11 @@
 <div class="product-list">
     <div>{{ product.art }}</div>
     <div>{{ product.category }}</div>
-    <div>{{ product.name }}</div>
-    <div>{{ product.model }}</div>
+    <div>{{ product.name | titlecase }}</div>
+    <div>{{ product.model | titlecase }}</div>
     <div>{{ product.description }}</div>
-    <div>{{ product.color }}</div>
-    <div>{{ product.price }}</div>
+    <div>{{ product.color | titlecase }}</div>
+    <div>{{ product.price | currency:'UAH':'symbol-narrow'}}</div>
     <div class="container-quantity">
         <div><input [disabled]="!product.isAvailable" 
             type="number" 

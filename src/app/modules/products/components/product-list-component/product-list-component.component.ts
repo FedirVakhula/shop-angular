@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 import { CartProduct, ProductModel } from 'src/app/interface/products';
 import { ProductsService } from 'src/app/services/products.service';
@@ -9,18 +10,18 @@ import { ProductsService } from 'src/app/services/products.service';
   styleUrls: ['./product-list-component.component.scss']
 })
 export class ProductListComponentComponent implements OnInit {
-  products: ProductModel[];
+  products$: BehaviorSubject<ProductModel[]>;
   titles: Array<string>;
 
   @Output() buyProduct: EventEmitter<CartProduct> = new EventEmitter();
 
   constructor(
-    private productsServiceService: ProductsService,
+    private productsService: ProductsService,
   ) { }
 
   ngOnInit(): void {
-    this.products = this.productsServiceService.getProducts();
-    this.titles = this.productsServiceService.getTableColumnTitles();
+    this.products$ = this.productsService.products$;
+    this.titles = this.productsService.getTableColumnTitles();
   }
 
   public onBuyProduct(newValue: CartProduct): void {
