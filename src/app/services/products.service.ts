@@ -110,6 +110,7 @@ export class ProductsService {
       description: 'lorem.....'
     }];
   titles: Array<string> = ['article', 'category', 'name', 'model', 'description', 'color', 'price', 'quantity', 'order'];
+  // почему BehaviorSubject, а не просто обычный Observable, наприме of(this.products)?
   products$ = new BehaviorSubject(this.products);
 
   constructor() { }
