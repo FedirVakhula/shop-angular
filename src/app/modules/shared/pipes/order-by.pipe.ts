@@ -13,6 +13,9 @@ export class OrderByPipe implements PipeTransform {
   customSort(arr: CartProduct[], fields: string[], isAsc: boolean): CartProduct[] {
     return arr.sort((a, b) => {
       // tslint:disable-next-line:prefer-for-of
+      // в документе не сказано было о том, что сортировка по второму полю должна быть
+      // в рамках одинаковых значений первого поля, иначе это не имет смысла.
+      // но за попытку спасибо.
       for (let i = 0; i < fields.length; i++) {
         if (typeof a[fields[i]] === 'string') {
           a[fields[i]] = a[fields[i]].toLowerCase();
