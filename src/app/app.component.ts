@@ -15,14 +15,14 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   @ViewChild('appTitle') appTitle: ElementRef;
 
-  constructor(private cartService: CartService) { }
+  constructor( private cartService: CartService) { }
 
   ngAfterViewInit(): void {
     this.appTitle.nativeElement.innerText = 'Title';
   }
 
   ngOnInit(): void {
-    this.orderList = this.cartService.getProducts();
+    this.orderList = this.cartService.cartProducts;
   }
 
   onBuyProduct(value: CartProduct): void {

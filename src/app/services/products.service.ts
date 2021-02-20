@@ -17,7 +17,8 @@ export class ProductsService {
       color: 'grey',
       price: 19999,
       isAvailable: false,
-      description: 'lorem.....'
+      description: 'lorem.....',
+      url: 'https://blog.eduonix.com/wp-content/uploads/2015/10/Angular.png'
     }, {
       category: Category.LAPTOP,
       name: 'asus',
@@ -27,7 +28,8 @@ export class ProductsService {
       color: 'hearty gold',
       price: 18799,
       isAvailable: true,
-      description: 'lorem.....'
+      description: 'lorem.....',
+      url: 'https://blog.eduonix.com/wp-content/uploads/2015/10/Angular.png'
     }, {
       category: Category.LAPTOP,
       name: 'asus',
@@ -37,7 +39,8 @@ export class ProductsService {
       color: 'grey',
       price: 31469,
       isAvailable: false,
-      description: 'lorem.....'
+      description: 'lorem.....',
+      url: 'https://blog.eduonix.com/wp-content/uploads/2015/10/Angular.png'
     }, {
       category: Category.LAPTOP,
       name: 'lenovo',
@@ -47,7 +50,8 @@ export class ProductsService {
       color: 'Phantom Black',
       price: 25999,
       isAvailable: true,
-      description: 'lorem.....'
+      description: 'lorem.....',
+      url: 'https://blog.eduonix.com/wp-content/uploads/2015/10/Angular.png'
     }, {
       category: Category.LAPTOP,
       name: 'lenovo',
@@ -57,7 +61,8 @@ export class ProductsService {
       color: 'Orchid',
       price: 26499,
       isAvailable: true,
-      description: 'lorem.....'
+      description: 'lorem.....',
+      url: 'https://blog.eduonix.com/wp-content/uploads/2015/10/Angular.png'
     }, {
       category: Category.LAPTOP,
       name: 'Dell',
@@ -67,7 +72,8 @@ export class ProductsService {
       color: 'Black',
       price: 16499,
       isAvailable: true,
-      description: 'lorem.....'
+      description: 'lorem.....',
+      url: 'https://blog.eduonix.com/wp-content/uploads/2015/10/Angular.png'
     }, {
       category: Category.MONITOR,
       name: 'Asus',
@@ -77,7 +83,8 @@ export class ProductsService {
       color: 'Black',
       price: 7747,
       isAvailable: true,
-      description: 'lorem.....'
+      description: 'lorem.....',
+      url: 'https://i.pinimg.com/originals/10/11/ce/1011cea7ce9c1c14b0ee71b722d126f4.jpg'
     }, {
       category: Category.MONITOR,
       name: 'Samsung',
@@ -87,7 +94,8 @@ export class ProductsService {
       color: 'Black',
       price: 3299,
       isAvailable: false,
-      description: 'lorem.....'
+      description: 'lorem.....',
+      url: 'https://i.pinimg.com/originals/10/11/ce/1011cea7ce9c1c14b0ee71b722d126f4.jpg'
     }, {
       category: Category.MONITOR,
       name: 'Acer',
@@ -97,7 +105,8 @@ export class ProductsService {
       color: 'Black',
       price: 4899,
       isAvailable: true,
-      description: 'lorem.....'
+      description: 'lorem.....',
+      url: 'https://i.pinimg.com/originals/10/11/ce/1011cea7ce9c1c14b0ee71b722d126f4.jpg'
     }, {
       category: Category.MONITOR,
       name: 'Dell',
@@ -107,14 +116,28 @@ export class ProductsService {
       color: 'Silver',
       price: 2777,
       isAvailable: true,
-      description: 'lorem.....'
+      description: 'lorem.....',
+      url: 'https://i.pinimg.com/originals/10/11/ce/1011cea7ce9c1c14b0ee71b722d126f4.jpg'
     }];
   titles: Array<string> = ['article', 'category', 'name', 'model', 'description', 'color', 'price', 'quantity', 'order'];
   products$ = new BehaviorSubject(this.products);
+  isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor() { }
 
   getTableColumnTitles(): Array<string> {
     return this.titles;
+  }
+
+  getProduct(id: string): ProductModel {
+    return this.products.find((product: ProductModel) => product.id === id);
+  }
+
+  updateProducts(product: ProductModel): void {
+    const i = this.products.findIndex(prod => prod.id === product.id);
+
+    if (i > -1) {
+      this.products.splice(i, 1, product);
+    }
   }
 }

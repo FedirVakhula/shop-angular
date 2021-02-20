@@ -14,6 +14,10 @@
             id="quantity"></div>
     </div>
     <div>
+        <button (click)="onDetailsProduct(product)">details</button>
+        <button *ngIf="isAdmin" (click)="onEditProduct(product)">edit</button>
+    </div>
+    <div>
         <button [disabled]="!product.isAvailable" (click)="onBuy(product, quantity.value)">Buy</button>
     </div>
 </div>

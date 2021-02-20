@@ -5,33 +5,48 @@ import { CartProduct } from '../interface/products';
   providedIn: 'root'
 })
 export class CartService {
-  cartProducts: CartProduct[] = [];
+  // tslint:disable-next-line:variable-name
+  private _cartProducts: CartProduct[] = [];
   totalSum = 0;
   totalQuantity = 0;
 
-  constructor() { }
+  constructor() {
+    const value = JSON.parse(localStorage.getItem('CartProduct'));
+    if (value) {
+      this.cartProducts = value;
+    }
+    this.updateCartData();
+  }
 
-  getProducts(): CartProduct[] {
-    return this.cartProducts;
+  get cartProducts(): CartProduct[] {
+    return this._cartProducts;
+  }
+
+  set cartProducts(products: CartProduct[]) {
+    localStorage.setItem('CartProduct', JSON.stringify(products));
+    this._cartProducts = products;
   }
 
   addProduct(product: CartProduct): CartProduct[] {
-    const prod: CartProduct = this.cartProducts.find((elem: CartProduct) => product.art === elem.art);
+    const cloneProducts = JSON.parse(JSON.stringify(this.cartProducts));
+    const prod: CartProduct = cloneProducts.find((elem: CartProduct) => product.art === elem.art);
     if (prod) {
       prod.quantity = +prod.quantity + +product.quantity;
     } else {
-      this.cartProducts.push(product);
+      cloneProducts.push(product);
     }
-    this.cartProducts = [...this.cartProducts];
+    this.cartProducts = [...cloneProducts];
     this.updateCartData();
     return this.cartProducts;
   }
 
   removeProduct(value: CartProduct): CartProduct[] {
+    const cloneProducts = JSON.parse(JSON.stringify(this.cartProducts));
     const indexProduct = this.cartProducts.indexOf(value);
-    this.cartProducts.splice(indexProduct, 1);
+    cloneProducts.splice(indexProduct, 1);
+    this.cartProducts = [...cloneProducts];
     this.updateCartData();
-    return [...this.cartProducts];
+    return this.cartProducts;
   }
 
   removeAllProducts(): CartProduct[] {
@@ -41,10 +56,12 @@ export class CartService {
   }
 
   changeQuantityProduct(prod: CartProduct, quant: number): CartProduct[] {
+    const cloneProducts = JSON.parse(JSON.stringify(this.cartProducts));
     const indexProduct = this.cartProducts.indexOf(prod);
-    this.cartProducts[indexProduct].quantity = quant;
+    cloneProducts[indexProduct].quantity = quant;
+    this.cartProducts = [...cloneProducts];
     this.updateCartData();
-    return [...this.cartProducts];
+    return this.cartProducts;
   }
 
   isEmptyCart(): boolean {

@@ -1,0 +1,13 @@
+<div>
+    <div>
+        <label for="">user name:</label>
+        <input #user type="text" placeholder="user name">
+    </div>
+    <div>
+        <label for="">password:</label>
+        <input #password type="password" placeholder="password">
+    </div>
+    <div>
+        <button (click)="onLogin(user.value, password.value)">Login</button>
+    </div>
+</div>
