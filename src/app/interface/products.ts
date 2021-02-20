@@ -13,8 +13,15 @@ export interface ProductModel {
     price: number;
     isAvailable: boolean;
     description: string;
+    url: string;
 }
 
-export interface CartProduct extends ProductModel{
+export interface CartProduct extends ProductModel {
     quantity: number;
+}
+
+export interface IUser {
+    name: string;
+    password: string;
+    role: string;
 }

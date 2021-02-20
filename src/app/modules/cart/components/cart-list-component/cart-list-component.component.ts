@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 import { CartProduct, ProductModel } from 'src/app/interface/products';
@@ -11,8 +11,7 @@ import { ProductsService } from 'src/app/services/products.service';
   styleUrls: ['./cart-list-component.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CartListComponentComponent implements OnChanges, OnInit {
-  @Input() newProduct: CartProduct;
+export class CartListComponentComponent implements OnInit {
 
   orderList: CartProduct[] = [];
   titles: Array<string>;
@@ -40,12 +39,7 @@ export class CartListComponentComponent implements OnChanges, OnInit {
 
   ngOnInit(): void {
     this.titles = this.productsService.getTableColumnTitles();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.newProduct?.currentValue) {
-      this.orderList = this.cartService.addProduct(this.newProduct);
-    }
+    this.orderList = this.cartService.cartProducts;
   }
 
   deleteProduct(value: CartProduct): void {
@@ -75,5 +69,4 @@ export class CartListComponentComponent implements OnChanges, OnInit {
   changeSortStrategy(checked: MatSlideToggleChange): void {
     this.sortUpDown = checked.checked;
   }
-
 }

@@ -1,4 +1,14 @@
 <h1 #appTitle></h1>
+<ul>
+    <li routerLinkActive="active">
+        <a routerLink="/products">products</a>
+    </li>
+    <li routerLinkActive="active">
+        <a routerLink="/cart">cart</a>
+    </li>
+    <li routerLinkActive="active">
+        <a routerLink="/login">Login</a>
+    </li>
+</ul>
 <app-first-component></app-first-component>
-<app-product-list-component (buyProduct)="onBuyProduct($event)"></app-product-list-component>
-<app-cart-list-component [newProduct]="newProduct"></app-cart-list-component>
+<router-outlet></router-outlet>

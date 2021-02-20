@@ -1,0 +1,47 @@
+<p>edit-product works!</p>
+
+
+<div class="continet-product-view">
+    <div id="user-form" *ngIf="product">
+        <div>
+            <label for="category">category</label>
+            <input name="category" type="text" id="category" [(ngModel)]="product.category">
+        </div>
+        <div>
+            <label for="">name</label>
+            <input #name type="text" [(ngModel)]="product.name">
+        </div>
+        <div>
+            <label for="">model</label>
+            <input type="text" [(ngModel)]="product.model">
+        </div>
+        <div>
+            <label for="">art</label>
+            <input type="text" [(ngModel)]="product.art">
+        </div>
+        <div>
+            <label for="">color</label>
+            <input type="text" [(ngModel)]="product.color">
+        </div>
+        <div>
+            <label for="">price</label>
+            <input type="number" [(ngModel)]="product.price">
+        </div>
+        <div>
+            <label for="">isAvailable</label>
+            <input type="checkbox" [(ngModel)]="product.isAvailable">
+        </div>
+        <div>
+            <label for="">description</label>
+            <input type="text" [(ngModel)]="product.description">
+        </div>
+        <div>
+            <label for="">url</label>
+            <input type="text" [(ngModel)]="product.url">
+        </div>
+    </div>
+    <div>
+        <button (click)="onGoBack()">Back </button>
+        <button (click)="onSaveUser()">Save </button>
+    </div>
+</div>

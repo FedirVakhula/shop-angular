@@ -1,0 +1,14 @@
+<div class="continet-product-view">
+    <div>
+        {{(product$ | async).name}}
+    </div>
+    <div>
+        <img src="{{(product$ | async).url}}" alt="{{(product$ | async).name}}">
+    </div>
+    <div>
+        {{(product$ | async).price}}
+    </div>
+    <div>
+        <button [disabled]="!(product$ | async).isAvailable" (click)="onBuyProduct()">buy</button>
+    </div>
+</div>
