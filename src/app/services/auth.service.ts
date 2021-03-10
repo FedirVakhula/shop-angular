@@ -1,37 +1,25 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IUser } from '../interface/products';
+import { Observable } from 'rxjs';
+import { User } from '../core/models/config-options';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private users = [
-    {
-      name: 'admin',
-      password: 'admin',
-      role: 'administrator'
-    },
-    {
-      name: 'user',
-      password: 'user',
-      role: 'user'
-    }
-  ];
+  private baseUrlUser = 'http://localhost:3000/users';
 
   isAdmin = false;
-  isLogged = false;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  checkUserIsAdmin(name: string, password: string): boolean {
-    this.isLogged = false;
-    this.users.forEach((data: IUser) => {
-      if (data.name === name && data.password === password) {
-        this.isAdmin = data.role === 'administrator';
-        this.isLogged = true;
-      }
-    });
-    return this.isLogged;
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.baseUrlUser);
+  }
+
+  checkUserIsAdmin(user: User): boolean {
+    this.isAdmin = user.role === 'admin';
+    return this.isAdmin;
   }
 }

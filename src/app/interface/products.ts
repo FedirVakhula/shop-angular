@@ -20,8 +20,11 @@ export interface CartProduct extends ProductModel {
     quantity: number;
 }
 
-export interface IUser {
-    name: string;
-    password: string;
-    role: string;
+export interface UserCart {
+    id: string;
+    items: CartProduct[];
+}
+
+export interface AppSettingsModel {
+    appConfig: boolean;
 }

@@ -23,5 +23,6 @@
     <div [ngClass]="{'order-sum':orderSum > 25000}" >SUM: {{ orderSum }}</div>
     <div>quantity of goods: {{ orderSumQuantity }}</div>
     <div><button (click)="removeAllProducts()">remove all products</button></div>
+    <div><button (click)="buyProducts()">buy products</button></div>
 </div>
 <ng-template #elseBlock><div>your cart is empty</div></ng-template>

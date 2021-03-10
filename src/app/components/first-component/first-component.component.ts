@@ -25,7 +25,7 @@ export class FirstComponentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.configOptionsService.setUser({ email: '1111' });
+    // this.configOptionsService.setUser({ email: '1111' });
     const user = this.configOptionsService.getUser();
     console.log(user);
     console.log(this.constantService);
