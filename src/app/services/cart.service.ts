@@ -7,6 +7,7 @@ import { CartProduct } from '../interface/products';
 export class CartService {
   // tslint:disable-next-line:variable-name
   private _cartProducts: CartProduct[] = [];
+  cartId: string;
   totalSum = 0;
   totalQuantity = 0;
 

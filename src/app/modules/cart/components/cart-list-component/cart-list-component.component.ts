@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 import { CartProduct, ProductModel } from 'src/app/interface/products';
+import { ApiCartService } from 'src/app/services/api-cart.service';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductsService } from 'src/app/services/products.service';
 
@@ -34,6 +35,7 @@ export class CartListComponentComponent implements OnInit {
 
   constructor(
     private cartService: CartService,
+    private apiCartService: ApiCartService,
     private productsService: ProductsService
   ) { }
 
@@ -68,5 +70,11 @@ export class CartListComponentComponent implements OnInit {
 
   changeSortStrategy(checked: MatSlideToggleChange): void {
     this.sortUpDown = checked.checked;
+  }
+
+  buyProducts(): void {
+    this.apiCartService.buyItems(this.cartService.cartId, this.orderList).subscribe(() => {
+      this.cartService.cartProducts = [];
+    });
   }
 }
