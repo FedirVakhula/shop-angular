@@ -33,3 +33,5 @@ import { TimingInterceptor } from './core/interceptors/timing.interceptor';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+// утилита concurrently отсутствует в зависимостях или она у вас глобально установлена?
