@@ -10,6 +10,8 @@ import { OrdersModule } from './modules/orders/orders.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './modules/login/login.component';
 import { TimingInterceptor } from './core/interceptors/timing.interceptor';
+import { AppStoreModule } from './core/@ngrx/app-store.module';
+import { SharedModule } from './modules/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -20,10 +22,12 @@ import { TimingInterceptor } from './core/interceptors/timing.interceptor';
   imports: [
     ProductsModule,
     OrdersModule,
-    AppRoutingModule,
     HttpClientModule,
     BrowserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    SharedModule,
+    AppStoreModule,
+    AppRoutingModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

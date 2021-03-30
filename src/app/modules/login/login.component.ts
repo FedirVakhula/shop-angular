@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { forkJoin, of } from 'rxjs';
 import { filter, map, switchMap, tap } from 'rxjs/operators';
+import { ProductFacadeService } from 'src/app/core/@ngrx/services/product.facade.service';
 import { User } from 'src/app/core/models/config-options';
 import { UserCart } from 'src/app/interface/products';
 import { ApiCartService } from 'src/app/services/api-cart.service';
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private apiCartService: ApiCartService,
     private cartService: CartService,
-    private router: Router
+    private productFacadeService: ProductFacadeService
   ) { }
 
   ngOnInit(): void {
@@ -38,13 +38,16 @@ export class LoginComponent implements OnInit {
         filter((user: User) => Boolean(user)),
         switchMap((user: User) => forkJoin([
           of(user),
-          this.apiCartService.getCart(user.id)
+          this.authService.checkUserIsAdmin(user) ? of(null) : this.apiCartService.getCart(user.id)
         ]))
       ).subscribe(([user, cart]: [User, UserCart]) => {
-        this.cartService.cartId = cart.id;
-        this.cartService.cartProducts = cart.items;
-        this.authService.checkUserIsAdmin(user) ?
-          this.router.navigate(['/admin']) : this.router.navigate(['/products']);
+        if (this.authService.checkUserIsAdmin(user)) {
+          this.productFacadeService.goNavigateTo({path: ['/admin']});
+        } else {
+          this.cartService.cartId = cart.id;
+          this.cartService.cartProducts = cart.items;
+          this.productFacadeService.goNavigateTo({path: ['/products']});
+        }
       });
   }
 

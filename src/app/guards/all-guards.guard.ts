@@ -13,7 +13,7 @@ import {
   Resolve
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { catchError, delay, finalize, map, take } from 'rxjs/operators';
+import { catchError, delay } from 'rxjs/operators';
 import { CanComponentDeactivate } from '../interface/can-component-deactivate.interface';
 import { ProductModel } from '../interface/products';
 import { AuthService } from '../services/auth.service';
@@ -38,7 +38,6 @@ export class AllGuards implements
   ) { }
 
   resolve(route: ActivatedRouteSnapshot): Observable<ProductModel | null> {
-    this.productsService.isLoading$.next(true);
     if (!route.paramMap.has('id')) {
       return of(null);
     }
@@ -46,13 +45,10 @@ export class AllGuards implements
 
     return of(this.productsService.getProduct(id))
       .pipe(
-        delay(2000),
         catchError(() => {
           this.router.navigate(['/products']);
           return of(null);
-        }),
-        finalize(() => this.productsService.isLoading$.next(false)
-        )
+        })
       );
   }
 

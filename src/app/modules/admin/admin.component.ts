@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ProductFacadeService } from 'src/app/core/@ngrx/services/product.facade.service';
 
 @Component({
   selector: 'app-admin',
@@ -9,15 +9,15 @@ import { Router } from '@angular/router';
 export class AdminComponent implements OnInit {
 
   constructor(
-    private router: Router
+    private productFacadeService: ProductFacadeService
   ) { }
 
   ngOnInit(): void {
   }
 
   oneEditProduct(): void {
-    const link = ['admin/products/edit', 1];
-    this.router.navigate(link);
+    const path = ['admin/products/edit', 1];
+    this.productFacadeService.goNavigateTo({ path });
   }
 
 }

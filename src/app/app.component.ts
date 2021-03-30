@@ -1,4 +1,6 @@
 import { AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ProductFacadeService } from './core/@ngrx/services/product.facade.service';
 import { AppSettingsService } from './core/services/app-settings.service';
 
 import { CartProduct } from './interface/products';
@@ -14,13 +16,15 @@ import { CartService } from './services/cart.service';
 export class AppComponent implements OnInit, AfterViewInit {
   newProduct: CartProduct;
   orderList: ProductsModule[];
+  isLoading$: Observable<boolean>;
 
   @ViewChild('appTitle') appTitle: ElementRef;
 
   constructor(
     private cartService: CartService,
     private apiCartService: ApiCartService,
-    private appSettingsService: AppSettingsService
+    private appSettingsService: AppSettingsService,
+    private productFacadeService: ProductFacadeService,
   ) { }
 
   @HostListener('window:unload', ['$event'])
@@ -36,6 +40,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.orderList = this.cartService.cartProducts;
+    this.isLoading$ = this.productFacadeService.isLoading$;
     this.appSettingsService.getAppSetting().subscribe((settings) => this.appSettingsService.setAppSetting(settings));
   }
 
