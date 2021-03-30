@@ -1,12 +1,11 @@
 <div class="container">
-    <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
     <div class="container-titles">
         <div *ngFor="let title of titles">
             <div>{{ title }}</div>
         </div>
     </div>
     <div class="container-products">
-        <div *ngFor="let product of products">
+        <div *ngFor="let product of (products$ | async)">
             <app-product-component 
             [product]="product"
             (buyProduct)="onBuyProduct($event)"

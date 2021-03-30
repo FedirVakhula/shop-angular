@@ -1,9 +1,9 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { AfterViewChecked, ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { ProductFacadeService } from 'src/app/core/@ngrx/services/product.facade.service';
 
 import { CartProduct, ProductModel } from 'src/app/interface/products';
-import { ApiProductsService } from 'src/app/services/api-products.service';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductsService } from 'src/app/services/products.service';
 
@@ -12,33 +12,28 @@ import { ProductsService } from 'src/app/services/products.service';
   templateUrl: './product-list-component.component.html',
   styleUrls: ['./product-list-component.component.scss']
 })
-export class ProductListComponentComponent implements OnInit {
-  products: ProductModel[] = [];
+export class ProductListComponentComponent implements OnInit, AfterViewChecked {
+  products$: Observable<ReadonlyArray<ProductModel>>;
   titles: Array<string>;
 
   @Output() buyProduct: EventEmitter<CartProduct> = new EventEmitter();
-  isLoading$: BehaviorSubject<boolean>;
 
   constructor(
     private productsService: ProductsService,
     private cartService: CartService,
-    private router: Router,
-    private api: ApiProductsService
+    private productFacadeService: ProductFacadeService,
+    private changeRef: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
-    this.isLoading$ = this.productsService.isLoading$;
-    this.products = this.productsService.products;
-    if (!this.products.length) {
-      this.isLoading$.next(true);
-      this.api.getProducts()
-        .then((products: ProductModel[]) => {
-          this.products = products;
-          this.productsService.products = products;
-        })
-        .finally(() => this.isLoading$.next(false));
-    }
     this.titles = this.productsService.getTableColumnTitles();
+    this.products$ = this.productFacadeService.products$.pipe(
+      tap((products: ProductModel[]) => {
+        if (!Boolean(products.length)) {
+          this.productFacadeService.getProducts();
+        }
+      })
+    );
   }
 
   onBuyProduct(newValue: CartProduct): void {
@@ -47,12 +42,14 @@ export class ProductListComponentComponent implements OnInit {
   }
 
   onDetailsProduct(product: ProductModel): void {
-    const link = ['product', product.id];
-    this.router.navigate(link);
+    const path = ['/product', product.id];
+    this.productFacadeService.goNavigateTo({ path });
   }
 
   onEditProduct(product: ProductModel): void {
-    const link = ['admin/products/edit', product.id];
-    this.router.navigate(link);
+    const path = ['admin/products/edit', product.id];
+    this.productFacadeService.goNavigateTo({ path });
   }
+
+  ngAfterViewChecked(): void { this.changeRef.detectChanges(); }
 }

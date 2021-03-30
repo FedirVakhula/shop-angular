@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router, UrlTree } from '@angular/router';
+import { ActivatedRoute, ParamMap, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
+import { ProductFacadeService } from 'src/app/core/@ngrx/services/product.facade.service';
 import { CanComponentDeactivate } from 'src/app/interface/can-component-deactivate.interface';
 import { CartProduct, ProductModel } from 'src/app/interface/products';
 import { ApiProductsService } from 'src/app/services/api-products.service';
@@ -21,9 +22,9 @@ export class EditProductComponent implements OnInit, CanComponentDeactivate {
   constructor(
     private route: ActivatedRoute,
     private cartService: CartService,
-    private router: Router,
     private dialogService: DialogService,
     private api: ApiProductsService,
+    private productFacadeService: ProductFacadeService,
     private productsService: ProductsService
   ) { }
 
@@ -41,13 +42,10 @@ export class EditProductComponent implements OnInit, CanComponentDeactivate {
   }
 
   onSaveEdit(): void {
-    const product = { ...this.product };
+    const product: ProductModel = { ...this.product };
 
     if (product.id) {
-      this.api.updateProducts(product).then(() => {
-        this.router.navigate(['/products', { id: product.id }]);
-        this.productsService.updateProducts(product);
-      });
+      this.productFacadeService.updateProduct(product);
     } else {
       this.onGoBack();
     }
@@ -55,7 +53,7 @@ export class EditProductComponent implements OnInit, CanComponentDeactivate {
   }
 
   onGoBack(): void {
-    this.router.navigate(['./../../'], { relativeTo: this.route });
+    this.productFacadeService.goBack();
   }
 
   canDeactivate():

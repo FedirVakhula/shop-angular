@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 
 import { ProductModel } from '../interface/products';
 
@@ -10,8 +9,6 @@ export class ProductsService {
   products: ProductModel[] = [];
 
   titles: Array<string> = ['article', 'category', 'name', 'model', 'description', 'color', 'price', 'quantity', 'order'];
-  isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
-
   constructor() { }
 
   getTableColumnTitles(): Array<string> {
