@@ -1,0 +1,74 @@
+<div>
+    <form [formGroup]="ordersForm">
+        <div>
+            <label for="firstName">first name</label>
+            <input type="text"
+                placeholder="first name"
+                id="firstName"
+                formControlName="firstName">
+                <span class="help-block" *ngIf="validationMessagesMap.get('email').message">
+                    {{validationMessagesMap.get('firstName').message}}
+                </span>
+        </div>
+        <div>
+            <label for="lastName">last name</label>
+            <input type="text"
+                placeholder="last name"
+                id="lastName"
+                formControlName="lastName">
+                <span class="help-block" *ngIf="validationMessagesMap.get('lastName').message">
+                    {{validationMessagesMap.get('lastName').message}}
+                </span>
+        </div>
+        <div>
+            <label for="email">email</label>
+            <input type="email"
+                placeholder="email"
+                id="email"
+                appAsyncEmailValidator
+                formControlName="email">
+                <span class="help-block" *ngIf="validationMessagesMap.get('email').message">
+                    {{validationMessagesMap.get('email').message}}
+                </span>
+        </div>
+        <div formArrayName="phones">
+            <div *ngFor="let phone of phones.controls; let i = index" [formGroupName]="i" >
+                <label for="phone">phone</label>
+                <input type="tel"
+                    placeholder="phone"
+                    id="phone">
+                    <span *ngIf="i>0">
+                        <button (click)="onRemovePhone(i)">X</button>
+                    </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <button (click)="onAddPhone()">
+            add phone
+            </button>
+        </div>
+        <div class="col-md-offset-1 col-md-8 checkbox" >
+            <label>
+                <input id="selfPickup"
+                    type="checkbox" 
+                    formControlName="selfPickup" >
+                    self-pickup
+            </label>
+        </div>
+
+        <div *ngIf="selfPickup.value">
+            <div>
+                <label for="">Address Type</label>
+                <textarea formControlName="adress" id="adress" cols="30" rows="10"></textarea>
+                <span class="help-block" *ngIf="adress.errors">
+                    <span *ngIf="adress.hasError('required')">
+                        Please enter your address.
+                    </span>
+                </span>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<br>Valid: {{ ordersForm.valid }}
