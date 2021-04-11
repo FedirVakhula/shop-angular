@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AllGuards } from 'src/app/guards/all-guards.guard';
 import { CartComponent } from './cart.component';
 import { CartListComponentComponent } from './components/cart-list-component/cart-list-component.component';
-import { ProcessOrderComponent } from './components/process-order/process-order.component';
+import { ProcessOrderComponent } from '../orders/components/process-order/process-order.component';
 
 const routes: Routes = [
   {
@@ -17,7 +16,7 @@ const routes: Routes = [
       {
         path: 'cart-list',
         component: CartListComponentComponent,
-      }
+      },
     ]
   }
 ];
