@@ -37,3 +37,5 @@ import { SharedModule } from './modules/shared/shared.module';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+// утилита concurrently отсутствует в зависимостях или она у вас глобально установлена?
