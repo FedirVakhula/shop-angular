@@ -1,25 +1,25 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+// import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CartListComponentComponent } from './cart-list-component.component';
+// import { CartListComponentComponent } from './cart-list-component.component';
 
-describe('CartListComponentComponent', () => {
-  let component: CartListComponentComponent;
-  let fixture: ComponentFixture<CartListComponentComponent>;
+// describe('CartListComponentComponent', () => {
+//   let component: CartListComponentComponent;
+//   let fixture: ComponentFixture<CartListComponentComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ CartListComponentComponent ]
-    })
-    .compileComponents();
-  });
+//   beforeEach(async () => {
+//     await TestBed.configureTestingModule({
+//       declarations: [ CartListComponentComponent ]
+//     })
+//     .compileComponents();
+//   });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(CartListComponentComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+//   beforeEach(() => {
+//     fixture = TestBed.createComponent(CartListComponentComponent);
+//     component = fixture.componentInstance;
+//     fixture.detectChanges();
+//   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+//   it('should create', () => {
+//     expect(component).toBeTruthy();
+//   });
+// });

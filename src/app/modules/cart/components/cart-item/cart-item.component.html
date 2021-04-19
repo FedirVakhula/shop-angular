@@ -1,19 +1,20 @@
 <div class="order-list">
-    <div appHighlight="green">{{ product.art }}</div>
-    <div>{{ product.category }}</div>
-    <div>{{ product.name | titlecase }}</div>
-    <div>{{ product.model | titlecase }}</div>
-    <div>{{ product.description }}</div>
-    <div>{{ product.color | titlecase }}</div>
-    <div>{{ product.price | currency:'UAH':'symbol-narrow'}}</div>
+    <div class="product-art" appHighlight="green">{{ product.art }}</div>
+    <div class="product-category">{{ product.category }}</div>
+    <div class="product-name">{{ product.name | titlecase }}</div>
+    <div class="product-model">{{ product.model | titlecase }}</div>
+    <div class="product-description">{{ product.description }}</div>
+    <div class="product-color">{{ product.color | titlecase }}</div>
+    <div class="product-price">{{ product.price | currency:'UAH':'symbol-narrow'}}</div>
     <div class="container-quantity">
         <div><input type="number" 
+                class="product-quantity"
                 #quantity 
                 [value]="product.quantity"
                 (blur)="onBlurMethod(product, quantity.value)"
                 (wheel)="onWheelMethod(product, quantity.value)"
                 (change)="changeQuantity(product, quantity.value)"></div>
-        <div><button (click)="changeQuantity(product, quantity.value)">change the quantity</button></div>
+        <div><button class="change-quantity" (click)="changeQuantity(product, quantity.value)">change the quantity</button></div>
     </div>
-    <div><button (click)="deleteProduct(product)">delete product</button></div>
+    <div><button class="delete-product" (click)="deleteProduct(product)">delete product</button></div>
 </div>
