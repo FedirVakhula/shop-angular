@@ -1,16 +1,16 @@
-import { TestBed } from '@angular/core/testing';
+// import { TestBed } from '@angular/core/testing';
 
-import { AllGuards } from './all-guards.guard';
+// import { AllGuards } from './all-guards.guard';
 
-describe('IsCartEmptyGuard', () => {
-  let guard: AllGuards;
+// describe('IsCartEmptyGuard', () => {
+//   let guard: AllGuards;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    guard = TestBed.inject(AllGuards);
-  });
+//   beforeEach(() => {
+//     TestBed.configureTestingModule({});
+//     guard = TestBed.inject(AllGuards);
+//   });
 
-  it('should be created', () => {
-    expect(guard).toBeTruthy();
-  });
-});
+//   it('should be created', () => {
+//     expect(guard).toBeTruthy();
+//   });
+// });
