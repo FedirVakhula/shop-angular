@@ -32,6 +32,7 @@
                 </span>
         </div>
         <div formArrayName="phones">
+          <!-- может [formControlName]="i" ведь создаются контролы, а не группы ? -->
             <div *ngFor="let phone of phones.controls; let i = index" [formGroupName]="i" >
                 <label for="phone">phone</label>
                 <input type="tel"
@@ -50,7 +51,7 @@
         <div class="col-md-offset-1 col-md-8 checkbox" >
             <label>
                 <input id="selfPickup"
-                    type="checkbox" 
+                    type="checkbox"
                     formControlName="selfPickup" >
                     self-pickup
             </label>
